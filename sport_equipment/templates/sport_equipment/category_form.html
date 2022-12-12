@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+Список категорий
+{% endblock %}
+
+{% block content %}
+  <h1>Создать</h1>
+<ul>
+  <form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+  </form>
+{% endblock %}

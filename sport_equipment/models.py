@@ -3,6 +3,7 @@ from django.db import models
 
 class Category(models.Model):
     name = models.CharField(unique=True, max_length=32)
+    is_active = models.BooleanField(default=True)
     # models.IntegerField
     # models.TextField
     # models.FloatField
