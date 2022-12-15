@@ -1,5 +1,7 @@
+from django.conf.urls.static import static
 from django.urls import path
 from sport_equipment import views
+from django.conf import settings
 
 app_name = 'sport_equipment'
 
@@ -11,4 +13,9 @@ urlpatterns = [
     path('category/create/', views.CategoryCreateView.as_view(), name='category-create'),
     path('category/update/<int:pk>/', views.CategoryUpdateView.as_view(), name='category-update'),
     path('category/delete/<int:pk>/', views.CategoryDeleteView.as_view(), name='category-delete'),
+    path('contacts/', views.ContactFormView.as_view(), name='contacts'),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

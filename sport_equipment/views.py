@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 
 from .models import Equipment, Category
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from django.views.generic import ListView, DetailView, CreateView,\
+    UpdateView, DeleteView, TemplateView, FormView
+from .forms import CategoryForm, ContactForm
 
 def equipment_list_view(request):
     equipment_list = Equipment.objects.all()
@@ -57,8 +59,9 @@ class CategoryDetailView(DetailView):
 
 class CategoryCreateView(CreateView):
     model = Category
-    fields = ('name',)
     success_url = reverse_lazy('sport_equipment:category-list')
+    form_class = CategoryForm
+
 
     # def form_valid(self, form):
     #     # 7. Валидация формы
@@ -84,3 +87,13 @@ class CategoryUpdateView(UpdateView):
 class CategoryDeleteView(DeleteView):
     model = Category
     success_url = reverse_lazy('sport_equipment:category-list')
+
+
+class ContactFormView(FormView):
+    template_name = 'sport_equipment/contact.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('sport_equipment:contacts')
+
+    def form_valid(self, form):
+        print('cleaned_data', form.cleaned_data)
+        return super().form_valid(form)

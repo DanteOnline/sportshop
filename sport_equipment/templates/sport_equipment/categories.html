@@ -9,7 +9,12 @@
 <ul>
   {% for category in categories %}
       <li>
-        <a class="btn btn-info" href="{% url 'sport_equipment:category-detail' pk=category.pk %}">{{category.name}}</a>
+        <a class="btn btn-info" href="{% url 'sport_equipment:category-detail' pk=category.pk %}">
+            {% if category.img %}
+                <img width="100px" src="{{category.img.url}}" alt="{{category.name}}">
+            {% endif %}
+            {{category.name}}
+        </a>
         <span><a class="btn btn-warning" href="{% url 'sport_equipment:category-update' pk=category.pk %}">Update</a></span>
         <span><a class="btn btn-danger" href="{% url 'sport_equipment:category-delete' pk=category.pk %}">Delete</a></span>
       </li>

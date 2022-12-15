@@ -7,9 +7,22 @@
 {% block content %}
   <h1>Создать</h1>
 <ul>
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{form.as_p}}
+    {% for field in form %}
+        <div>{{field.label}}</div>
+        <div>{{field}}</div>
+        {% if field.errors %}
+          <p class="text-danger">
+            {{field.errors}}
+          </p>
+        {% endif %}
+    {% endfor %}
+    {% if form.errors %}
+        <p class="text-danger">
+          {{form.errors}}
+        </p>
+    {% endif %}
     <button type="submit" class="btn btn-primary">Сохранить</button>
   </form>
 {% endblock %}
