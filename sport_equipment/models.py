@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.functional import cached_property
 
 
 class TimestampMixin(models.Model):
@@ -16,6 +17,22 @@ class Category(TimestampMixin):
     is_active = models.BooleanField(default=True)
     # 1. Blob (Bites), 2. На диске
     img = models.ImageField(upload_to='category', blank=True, null=True)
+    rating = models.PositiveIntegerField(default=0)
+    # Сколько товаров в этой категории
+    @cached_property
+    def equipment_count(self):
+        equipments = Equipment.objects.filter(category=self)
+        # result = len(equipments)
+        result = equipments.count()
+        return result
+
+    @cached_property
+    def has_equipment(self):
+        # result = len(Equipment.objects.filter(category=self)) > 0
+        # result = Equipment.objects.filter(category=self).count() > 0
+        result = Equipment.objects.filter(category=self).exists()
+        return result
+
 
     # models.IntegerField
     # models.TextField

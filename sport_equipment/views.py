@@ -38,6 +38,15 @@ class CategoryListView(ListView):
         # 4.
         context = super().get_context_data(*args, **kwargs)
         context['useful_information'] = 'ЧТо то полезное'
+
+        categories = context['object_list']
+
+        all_count = 0
+        for category in categories:
+            all_count += category.equipment_count
+
+        context['all_count'] = all_count
+
         return context
 
     def get(self, request, *args, **kwargs):

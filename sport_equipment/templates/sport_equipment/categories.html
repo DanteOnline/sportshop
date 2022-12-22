@@ -13,13 +13,22 @@
             {% if category.img %}
                 <img width="100px" src="{{category.img.url}}" alt="{{category.name}}">
             {% endif %}
-            {{category.name}}
-        </a>
-        <span><a class="btn btn-warning" href="{% url 'sport_equipment:category-update' pk=category.pk %}">Update</a></span>
-        <span><a class="btn btn-danger" href="{% url 'sport_equipment:category-delete' pk=category.pk %}">Delete</a></span>
+            {% with category.equipment_count as equipment_count %}
+                    {{category.name}} | {{equipment_count}}
+
+                </a>
+                <span><a class="btn btn-warning" href="{% url 'sport_equipment:category-update' pk=category.pk %}">Update</a></span>
+                <span><a class="btn btn-danger" href="{% url 'sport_equipment:category-delete' pk=category.pk %}">Delete</a></span>
+
+                  ...
+                  количество: {{equipment_count}} {{category.has_equipment}}
+            {% endwith %}
       </li>
   {% endfor %}
   </ul>
+    <p>
+        Итого: {{all_count}}
+    </p>
   <p></p>
     {{useful_information}}
 <p></p>
