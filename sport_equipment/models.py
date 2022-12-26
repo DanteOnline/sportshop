@@ -34,6 +34,7 @@ class Category(TimestampMixin):
         return result
 
 
+
     # models.IntegerField
     # models.TextField
     # models.FloatField
@@ -58,6 +59,9 @@ class Product(models.Model):
     cost = models.PositiveIntegerField(default=1)
     name = models.CharField(max_length=64)
 
+    def buy(self):
+        raise NotImplementedError()
+
 # Оборудование ЯВЛЯЕТСЯ Товаром ?
 class Equipment(Product, TimestampMixin):
 
@@ -69,10 +73,10 @@ class Equipment(Product, TimestampMixin):
     is_own_shop = models.BooleanField(default=False)
 
     def buy(self):
-        print('Вы купили', self.name)
+        print('Купили', self.name)
 
     def __str__(self):
-        return f'{self.name}/{self.category}'
+        return f'{self.name}'
 
 
 class DebugEquipment(Equipment):
