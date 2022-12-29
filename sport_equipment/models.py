@@ -71,6 +71,8 @@ class Equipment(Product, TimestampMixin):
     # CASCADE, SET_NULL, PROTECTED
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     is_own_shop = models.BooleanField(default=False)
+    def get_category_name_title(self):
+        return self.category.name.upper()
 
     def buy(self):
         print('Купили', self.name)

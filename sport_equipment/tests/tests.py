@@ -25,7 +25,7 @@ class TestCategory(TestCase):
 
     def test_has_equipment_true(self):
         # category = Category.objects.create(name='test category name')
-        Equipment.objects.create(name='test equipment', category=self.category)
+        Equipment.objects.create(category=self.category)
         self.assertTrue(self.category.has_equipment)
 #
 #
@@ -37,6 +37,9 @@ class TestEquipment(TestCase):
         equipment = mixer.blend(Equipment, name='test equipment')
         self.assertEqual(str(equipment), 'test equipment')
 
+    def test_get_category_name_title(self):
+        equipment = mixer.blend(Equipment, category__name='some name')
+        self.assertEqual(equipment.get_category_name_title(), 'SOME NAME')
 
 class TestProduct(SimpleTestCase):
 
