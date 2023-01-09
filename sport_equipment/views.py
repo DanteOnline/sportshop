@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from rq.job import Job
 
 from .models import Equipment, Category
 from django.views.generic import ListView, DetailView, CreateView,\
     UpdateView, DeleteView, TemplateView, FormView
 from .forms import CategoryForm, ContactForm
+from redis import Redis
 
 def equipment_list_view(request):
     equipment_list = Equipment.objects.all()
@@ -106,3 +108,22 @@ class ContactFormView(FormView):
     def form_valid(self, form):
         print('cleaned_data', form.cleaned_data)
         return super().form_valid(form)
+
+
+class TaskResultView(TemplateView):
+    template_name = 'sport_equipment/task_result.html'
+
+    def get(self, request, *args, **kwargs):
+        task_id = kwargs['task_id']
+        self.task_id = task_id
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        redis = Redis()
+        job = Job.fetch(id=self.task_id, connection=redis)
+        context['result'] = job.return_value
+        context['status'] = job.get_status()
+        return context
+
+

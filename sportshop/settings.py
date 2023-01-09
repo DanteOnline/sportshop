@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'user',
     'django_cleanup.apps.CleanupConfig',
     "debug_toolbar",
+    "django_rq",
 ]
 
 MIDDLEWARE = [
@@ -141,3 +142,13 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+
+RQ_QUEUES = {
+    'default': {
+        'HOST': 'localhost',
+        'PORT': 6379,
+        'DB': 0,
+        # 'PASSWORD': 'some-password',
+        'DEFAULT_TIMEOUT': 360,
+    },
+}

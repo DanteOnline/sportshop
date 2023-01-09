@@ -14,6 +14,7 @@ urlpatterns = [
     path('category/update/<int:pk>/', views.CategoryUpdateView.as_view(), name='category-update'),
     path('category/delete/<int:pk>/', views.CategoryDeleteView.as_view(), name='category-delete'),
     path('contacts/', views.ContactFormView.as_view(), name='contacts'),
+    path('task-result/<str:task_id>/', views.TaskResultView.as_view(), name='task_result'),
 ]
 
 

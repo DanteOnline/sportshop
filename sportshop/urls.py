@@ -20,4 +20,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include('sport_equipment.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
+    path('django-rq/', include('django_rq.urls'))
 ]
