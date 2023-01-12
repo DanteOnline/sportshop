@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     "debug_toolbar",
     "django_rq",
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -151,4 +152,12 @@ RQ_QUEUES = {
         # 'PASSWORD': 'some-password',
         'DEFAULT_TIMEOUT': 360,
     },
+}
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
 }

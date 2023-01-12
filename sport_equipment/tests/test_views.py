@@ -24,12 +24,12 @@ class TestCategoryList(TestCase):
         response = self.client.get('/category/list/')
         self.assertNotIn('ABCDEF'.encode(encoding='utf-8'), response.content)
         Category.objects.create(name='ABCDEF')
-        response = self.client.get('/category/list/')
+        response = self.client.get('/equipment-category/list/')
         self.assertIn('ABCDEF'.encode(encoding='utf-8'), response.content)
 
     def test_category_in_context(self):
         category = Category.objects.create(name='ABCDEF')
-        response = self.client.get('/category/list/')
+        response = self.client.get('/equipment-category/list/')
         context = response.context
         # print(type(context))
         # for item in context:
