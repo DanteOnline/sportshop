@@ -1,43 +1,47 @@
 from rest_framework import serializers
 from django.core.management.base import BaseCommand
+from .python_models import Category, CategoryCard, Equipment, Tag
 
-
+# WORK WITHOUT DJANGO
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
         class CategorySerializer(serializers.Serializer):
             name = serializers.CharField(max_length=128)
-            rating_year = serializers.IntegerField()
+            rating = serializers.IntegerField()
 
-        class BiographySerializer(serializers.Serializer):
+        class CategoryCardSerializer(serializers.Serializer):
             text = serializers.CharField(max_length=1024)
-            author = AuthorSerializer()
+            category = CategorySerializer()
 
-        class BookSerializer(serializers.Serializer):
+        class TagSerializer(serializers.Serializer):
+            name = serializers.CharField(max_length=32)
+
+        class EquipmentSerializer(serializers.Serializer):
             name = serializers.CharField(max_length=128)
-            authors = AuthorSerializer(many=True)
+            category = CategorySerializer()
+            tags = TagSerializer(many=True)
 
-        class ArticleSerializer(serializers.Serializer):
-            name = serializers.CharField(max_length=128)
-            author = AuthorSerializer()
+        category = Category('Плавание', 4)
+        serializer = CategorySerializer(category)
+        print(serializer.data)
+        print(type(serializer.data))
 
-        author1 = Author('Грин', 1880)
-        serializer = AuthorSerializer(author1)
-        print(serializer.data)  # {'name': 'Грин', 'birthday_year': 1880}
+        category_card = CategoryCard(category, 'Текст карточки')
+        serializer = CategoryCardSerializer(category_card)
+        print(serializer.data)
 
-        biography = Biography('Текст биографии', author1)
-        serializer = BiographySerializer(biography)
-        print(
-            serializer.data)  # {'text': 'Текст биографии', 'author': OrderedDict([('name', 'Грин'), ('birthday_year', 1880)])}
+        tags = []
+        tag = Tag(name='Атлетика')
+        serializer = TagSerializer(tag)
+        print(serializer.data)
+        tags.append(tag)
 
-        article = Article('Некоторая статья', author1)
-        serializer = ArticleSerializer(article)
-        print(
-            serializer.data)  # {'name': 'Некоторая статья', 'author': OrderedDict([('name', 'Грин'), ('birthday_year', 1880)])}
+        tag = Tag(name='Красиво')
+        serializer = TagSerializer(tag)
+        print(serializer.data)
+        tags.append(tag)
 
-        author2 = Author('Пушкин', 1799)
-        book = Book('Некоторая книга', [author1,
-                                        author2])  # {'name': 'Некоторая книга', 'authors': [OrderedDict([('name', 'Грин'), ('birthday_year', 1880)]), OrderedDict([('name', 'Пушкин'), ('birthday_year', 1799)])]}
-
-        serializer = BookSerializer(book)
+        equipment = Equipment('Ласты', category, tags)
+        serializer = EquipmentSerializer(equipment)
         print(serializer.data)

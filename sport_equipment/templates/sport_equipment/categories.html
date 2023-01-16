@@ -9,7 +9,7 @@
 <ul>
   {% for category in categories %}
       <li>
-        <a class="btn btn-info" href="{% url 'sport_equipment:category-detail' pk=category.pk %}">
+        <a class="btn btn-info" href="{% url 'sport_equipment:equipment-category-detail' pk=category.pk %}">
             {% if category.img %}
                 <img width="100px" src="{{category.img.url}}" alt="{{category.name}}">
             {% endif %}

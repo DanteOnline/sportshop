@@ -23,14 +23,18 @@ class Command(BaseCommand):
         json_bytes = renderer.render(serializer.data)
         print(json_bytes)
         print(type(json_bytes))  # <class 'bytes'>
-
+        #
         from rest_framework.parsers import JSONParser
         stream = io.BytesIO(json_bytes)
-        data = JSONParser().parse(stream)
+        parser = JSONParser()
+        data = parser.parse(stream)
         print(data)
         print(type(data))  # <class 'dict'>
-
+        #
         serializer = CategorySerializer(data=data)
         print(serializer.is_valid())  # True
         print(serializer.validated_data)
         print(type(serializer.validated_data))  # <class 'collections.OrderedDict'>
+
+        category = serializer.save()
+

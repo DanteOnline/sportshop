@@ -1,7 +1,6 @@
 from django.core.management.base import BaseCommand
 from rest_framework import serializers
 from .python_models import Category
-import io
 
 # WORK WITHOUT DJANGO
 
@@ -25,13 +24,25 @@ class Command(BaseCommand):
         serializer.is_valid()
         category = serializer.save()
 
+        print(category)
+
         data = {'name': 'Плавание', 'rating': 4}
         serializer = CategorySerializer(category, data=data)
         serializer.is_valid()
         category = serializer.save()
+
+        print(category)
 
         data = {'rating': 5}
         serializer = CategorySerializer(category, data=data, partial=True)
         serializer.is_valid()
         category = serializer.save()
         print(category)
+
+        data = {'rating': 6}
+        serializer = CategorySerializer(category, data=data)
+        is_valid = serializer.is_valid()
+        print(serializer.errors)
+        print(is_valid)
+
+

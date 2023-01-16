@@ -62,6 +62,12 @@ class Product(models.Model):
     def buy(self):
         raise NotImplementedError()
 
+
+class Tag(TimestampMixin):
+    name = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.name
 # Оборудование ЯВЛЯЕТСЯ Товаром ?
 class Equipment(Product, TimestampMixin):
 
@@ -70,6 +76,7 @@ class Equipment(Product, TimestampMixin):
 
     # CASCADE, SET_NULL, PROTECTED
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag)
     is_own_shop = models.BooleanField(default=False)
     def get_category_name_title(self):
         return self.category.name.upper()
@@ -96,6 +103,6 @@ class Excursion(Product, TimestampMixin):
     days_count = models.PositiveIntegerField(default=1)
 
 
-class ProductCard(TimestampMixin):
-    product = models.OneToOneField(Product)
+class CategoryCard(TimestampMixin):
+    category = models.OneToOneField(Category, on_delete=models.CASCADE)
     text = models.TextField(default='-')
