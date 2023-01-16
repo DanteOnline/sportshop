@@ -94,3 +94,8 @@ class DebugEquipment(Equipment):
 
 class Excursion(Product, TimestampMixin):
     days_count = models.PositiveIntegerField(default=1)
+
+
+class ProductCard(TimestampMixin):
+    product = models.OneToOneField(Product)
+    text = models.TextField(default='-')
