@@ -23,4 +23,5 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
     path('django-rq/', include('django_rq.urls')),
     path('api-auth/', include('rest_framework.urls')),
+    path('drf-api/', include('drf_api.urls')),
 ]
