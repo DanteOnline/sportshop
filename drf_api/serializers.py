@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from sport_equipment.models import Category
+from sport_equipment.models import Category, Equipment
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -7,3 +7,8 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = '__all__'
 
+
+class EquipmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Equipment
+        fields = ('name',)

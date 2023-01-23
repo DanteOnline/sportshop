@@ -11,6 +11,7 @@ app_name = 'drf_api'
 router = DefaultRouter()
 router.register(r'category', viewsets.CategoryViewSet, basename='category')
 router.register(r'mixin', viewsets.CategoryMixinViewSet)
+router.register(r'equipment', viewsets.EquipmentViewSet)
 
 urlpatterns = [
     path('', views.ListCategoryAPIView.as_view(), name='list-category-api-view'),

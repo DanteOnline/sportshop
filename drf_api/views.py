@@ -3,6 +3,7 @@ from rest_framework.generics import ListAPIView, CreateAPIView, ListCreateAPIVie
 from rest_framework.response import Response
 # from rest_framework import authentication, permissions
 from sport_equipment.models import Category
+from .permissions import StaffOnly
 from .serializers import CategorySerializer
 
 
@@ -14,7 +15,7 @@ class ListCategoryAPIView(APIView):
     * Only admin users are able to access this view.
     """
     # authentication_classes = [authentication.TokenAuthentication]
-    # permission_classes = [permissions.IsAdminUser]
+    permission_classes = [StaffOnly]
 
     def get(self, request, format=None):
         """
