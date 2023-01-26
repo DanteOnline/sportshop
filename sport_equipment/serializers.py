@@ -8,4 +8,5 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+        ref_name = 'sport_equipment_category'
 

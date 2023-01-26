@@ -30,7 +30,12 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
+# Application definition   # 1,2,3,4 / 1.1, 1.2, 1.2 / 1.2.1, 1.5.4
+# 1.5.4
+# 1 - нет обратной зависимости с предыдущей версией 2.5.4
+# 5 - мы добавили что то новое, но есть совместимость 1.6.4
+# 4 - есть соместимость мы поправили баги 1.6.5
+
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -46,7 +51,8 @@ INSTALLED_APPS = [
     "django_rq",
     'rest_framework',
     'django_filters',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -173,5 +179,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
-    ]
+    ],
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning', # Версия в заголовках,
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning', # Версия адресе
+    #'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning', # Версия по пространству имен
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning', # По параметру в адресе
 }

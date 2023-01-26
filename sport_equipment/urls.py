@@ -1,5 +1,5 @@
 from django.conf.urls.static import static
-from django.urls import path, include
+from django.urls import path, include, re_path
 from sport_equipment import views
 from django.conf import settings
 from rest_framework.routers import DefaultRouter, SimpleRouter

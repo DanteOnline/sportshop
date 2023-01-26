@@ -46,4 +46,14 @@ print(response.json())
 
 header_code = b'c3RhZmY6c3RhZmYxMjM0NTY'
 
-print(base64.b64decode(header_code))
+# print(base64.b64decode(header_code))
+
+print('*'*100)
+URL = 'http://127.0.0.1:8000/user/'
+
+headers = {
+    'Accept': 'application/json; version=v2.0'
+}
+
+response = requests.get(URL, headers=headers)
+print(response.json())
