@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework.authtoken',
     'drf_yasg',
+    'graphene_django',
 ]
 
 MIDDLEWARE = [
@@ -184,4 +185,8 @@ REST_FRAMEWORK = {
     # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning', # Версия адресе
     #'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning', # Версия по пространству имен
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning', # По параметру в адресе
+}
+
+GRAPHENE = {
+    "SCHEMA": "sportshop.schema.schema"
 }
