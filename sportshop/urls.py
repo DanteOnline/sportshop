@@ -40,6 +40,7 @@ urlpatterns = [
     path('django-rq/', include('django_rq.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('drf-api/', include('drf_api.urls')),
+    path('partners/', include('partners.urls')),
     path('user/', include('user.urls')),
     re_path(r'^api/v1.0/user/', include('user.urls', namespace='v1.0')),
     re_path(r'^api/v2.0/user/', include('user.urls', namespace='v2.0')),

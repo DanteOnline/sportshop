@@ -44,8 +44,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # MY
     'sport_equipment',
     'user',
+    'partners',
+    # EXTERNAL 
     'django_cleanup.apps.CleanupConfig',
     "debug_toolbar",
     "django_rq",
